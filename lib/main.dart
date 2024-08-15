@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:noteful/screens/notes_screen.dart';
+import 'package:noteful/models/note_database.dart';
+import 'package:noteful/screens/splash.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+
+// Initializing Notes Isar Database
+  WidgetsFlutterBinding.ensureInitialized();
+  await NoteDatabase.initialize();
+
+  runApp(ChangeNotifierProvider(
+    create: (context) => NoteDatabase(),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -12,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: NotesScreen(),
+      home: SplashScreen(),
     );
   }
 }
