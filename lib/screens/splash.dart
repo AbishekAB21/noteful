@@ -50,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void goHome(BuildContext context) async {
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(Duration(seconds: 4));
 
     Navigator.pushReplacement(
         context,

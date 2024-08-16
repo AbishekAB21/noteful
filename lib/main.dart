@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:noteful/models/note_database.dart';
+import 'package:noteful/methods/note_database_methods.dart';
 import 'package:noteful/screens/splash.dart';
 import 'package:provider/provider.dart';
 
