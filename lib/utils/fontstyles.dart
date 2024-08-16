@@ -6,21 +6,30 @@ class Fontstyles {
         fontSize: 42.0, fontWeight: FontWeight.w400, fontFamily: "Pacifico");
   }
 
-  static TextStyle buttontext() {
+  static TextStyle RegularTextStyle(BuildContext context) {
+    return TextStyle(
+      color: Theme.of(context).colorScheme.inversePrimary,
+        fontWeight: FontWeight.w300,
+        fontFamily: "Merriweather Sans");
+  }
+
+  static TextStyle buttontext(BuildContext context) {
     return TextStyle(
         fontSize: 15.0,
+        color: Theme.of(context).colorScheme.inversePrimary,
         fontWeight: FontWeight.w500,
         fontFamily: "Merriweather Sans");
   }
 
-  static TextStyle buttontext2() {
+  static TextStyle buttontext2(BuildContext context) {
     return TextStyle(
+      color: Theme.of(context).colorScheme.inversePrimary,
         fontWeight: FontWeight.w500, fontFamily: "Merriweather Sans");
   }
 
-  static TextStyle notesText() {
+  static TextStyle notesText(BuildContext context) {
     return TextStyle(
-        color: Colors.black,
+        color: Theme.of(context).colorScheme.inversePrimary,
         fontSize: 15.0,
         fontWeight: FontWeight.w500,
         fontFamily: "Merriweather Sans");

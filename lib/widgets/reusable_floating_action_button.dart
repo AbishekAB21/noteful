@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class ReusableFloatingActionButton extends StatelessWidget {
   final VoidCallback onpressed;
-  final String imagePath;
+  final Icon icon;
   ReusableFloatingActionButton(
-      {super.key, required this.onpressed, required this.imagePath});
+      {super.key, required this.onpressed, required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +16,7 @@ class ReusableFloatingActionButton extends StatelessWidget {
       enableFeedback: false,
       highlightElevation: 0,
       onPressed: onpressed,
-      child: Image.asset(
-        imagePath,
-        height: 50,
-        width: 50,
-      ),
+      child: icon
     );
   }
 }
