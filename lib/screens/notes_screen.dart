@@ -14,6 +14,7 @@ class NotesScreen extends StatefulWidget {
 
 class _NotesScreenState extends State<NotesScreen> {
   final TextEditingController noteController = TextEditingController();
+
   // Create
 
   void createNote() {
@@ -97,8 +98,10 @@ class _NotesScreenState extends State<NotesScreen> {
       builder: (context) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         content: Text(
-            "This will permenantly delete the note. Do you still want to it ?", style: Fontstyles.buttontext(),),
-        title: Text("Think about it..",style: Fontstyles.buttontext2()),
+          "This will permenantly delete the note. Do you still want to it ?",
+          style: Fontstyles.buttontext(),
+        ),
+        title: Text("Think about it..", style: Fontstyles.buttontext2()),
         actions: [
           TextButton(
             onPressed: () {
@@ -127,38 +130,71 @@ class _NotesScreenState extends State<NotesScreen> {
     final noteDatabase = context.watch<NoteDatabase>();
 
     final List<Note> currentnotes = noteDatabase.currentNotes;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Notes", style: Fontstyles.boldtextMerriweatherSans(),),
-      ),
-      floatingActionButton: ReusableFloatingActionButton(
-          onpressed: createNote, imagePath: "assets/add-note.png"),
-      body: ListView.builder(
-        itemCount: currentnotes.length,
-        itemBuilder: (context, index) {
-          final note = currentnotes[index];
+    return SafeArea(
+      child: Scaffold(
 
-          return ListTile(
-            title: Text(note.text, style: Fontstyles.notesText(),),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                    onPressed: () => updateNote(note),
-                    icon: Icon(
-                      Icons.edit,
-                      color: Colors.black,
-                    )),
-                IconButton(
-                    onPressed: () => deleteNote(note.id),
-                    icon: Icon(
-                      Icons.delete,
-                      color: Colors.black,
-                    )),
-              ],
+        backgroundColor: Theme.of(context).colorScheme.background,
+
+
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+        ),
+
+        drawer: Drawer(),
+
+
+        floatingActionButton: ReusableFloatingActionButton(
+            onpressed: createNote, imagePath: "assets/add-note.png"),
+
+
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // Heading
+        
+            Text(
+              "Notes",
+              style: Fontstyles.boldtextMerriweatherSans(context),
             ),
-          );
-        },
+
+            SizedBox(height: 20,),
+        
+            // List of Notes
+            Expanded(
+              child: ListView.builder(
+                itemCount: currentnotes.length,
+                itemBuilder: (context, index) {
+                  final note = currentnotes[index];
+        
+                  return ListTile(
+                    title: Text(
+                      note.text,
+                      style: Fontstyles.notesText(),
+                    ),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                            onPressed: () => updateNote(note),
+                            icon: Icon(
+                              Icons.edit,
+                              color: Theme.of(context).colorScheme.inversePrimary,
+                            )),
+                        IconButton(
+                            onPressed: () => deleteNote(note.id),
+                            icon: Icon(
+                              Icons.delete,
+                              color: Theme.of(context).colorScheme.inversePrimary,
+                            )),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
