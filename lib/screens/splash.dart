@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:noteful/screens/notes_screen.dart';
-import 'package:noteful/utils.dart';
+import 'package:noteful/utils/fontstyles.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

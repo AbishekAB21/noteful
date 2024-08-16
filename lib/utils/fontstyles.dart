@@ -9,5 +9,13 @@ class Fontstyles {
         fontWeight: FontWeight.w400,
         fontFamily: "Pacifico");
   }
+
+  static TextStyle buttontext() {
+    return TextStyle(
+        color: Colors.black,
+        fontSize: 15.0,
+        fontWeight: FontWeight.w500,
+        );
+  }
   
 }
