@@ -54,14 +54,75 @@ class _NotesScreenState extends State<NotesScreen> {
 
   // Update
 
+  void updateNote(Note note) {
+    // pre-filling the textfield
+    noteController.text = note.text;
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        content: TextField(
+          controller: noteController,
+          decoration: InputDecoration(
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text("Cancel", style: Fontstyles.buttontext()),
+          ),
+          TextButton(
+              onPressed: () {
+                context
+                    .read<NoteDatabase>()
+                    .updateNotes(note.id, noteController.text);
+                Navigator.pop(context);
+                noteController.clear();
+              },
+              child: Text("Update", style: Fontstyles.buttontext()))
+        ],
+      ),
+    );
+  }
+
   // Delete
+
+  void deleteNote(int id) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        content: Text(
+            "This will permenantly delete the note. Do you still want to it ?"),
+        title: Text("Think about it.."),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text("Cancel", style: Fontstyles.buttontext()),
+          ),
+          TextButton(
+              onPressed: () {
+                context.read<NoteDatabase>().deleteNotes(id);
+                Navigator.pop(context);
+              },
+              child: Text("Delete", style: Fontstyles.buttontext()))
+        ],
+      ),
+    );
+  }
 
   @override
   void initState() {
-    
     super.initState();
     readNotes();
   }
+
   Widget build(BuildContext context) {
     final noteDatabase = context.watch<NoteDatabase>();
 
@@ -79,6 +140,23 @@ class _NotesScreenState extends State<NotesScreen> {
 
           return ListTile(
             title: Text(note.text),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                    onPressed: () => updateNote(note),
+                    icon: Icon(
+                      Icons.edit,
+                      color: Colors.black,
+                    )),
+                IconButton(
+                    onPressed: () => deleteNote(note.id),
+                    icon: Icon(
+                      Icons.delete,
+                      color: Colors.black,
+                    )),
+              ],
+            ),
           );
         },
       ),
