@@ -97,8 +97,8 @@ class _NotesScreenState extends State<NotesScreen> {
       builder: (context) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         content: Text(
-            "This will permenantly delete the note. Do you still want to it ?"),
-        title: Text("Think about it.."),
+            "This will permenantly delete the note. Do you still want to it ?", style: Fontstyles.buttontext(),),
+        title: Text("Think about it..",style: Fontstyles.buttontext2()),
         actions: [
           TextButton(
             onPressed: () {
@@ -129,7 +129,7 @@ class _NotesScreenState extends State<NotesScreen> {
     final List<Note> currentnotes = noteDatabase.currentNotes;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Notes"),
+        title: Text("Notes", style: Fontstyles.boldtextMerriweatherSans(),),
       ),
       floatingActionButton: ReusableFloatingActionButton(
           onpressed: createNote, imagePath: "assets/add-note.png"),
@@ -139,7 +139,7 @@ class _NotesScreenState extends State<NotesScreen> {
           final note = currentnotes[index];
 
           return ListTile(
-            title: Text(note.text),
+            title: Text(note.text, style: Fontstyles.notesText(),),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
