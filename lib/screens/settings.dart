@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:noteful/provider/theme_provider.dart';
+import 'package:noteful/utils/fontstyles.dart';
 import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -21,20 +22,19 @@ class SettingsScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
         margin: EdgeInsets.only(left: 25, right: 25, top: 10),
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.primary,
-          borderRadius: BorderRadius.circular(12)
-        ),
+            color: Theme.of(context).colorScheme.primary,
+            borderRadius: BorderRadius.circular(12)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("Dark Mode"),
+            Text("Dark Mode", style: Fontstyles.buttontext2(context),),
             CupertinoSwitch(
-            value: themeProvider.isDarkMode,
-            onChanged: (value) {
-              themeProvider.toggleTheme();
-              themeProvider.notifyListeners();
-            },
-          ),
+              activeColor: Theme.of(context).colorScheme.inversePrimary,
+              value: themeProvider.isDarkMode,
+              onChanged: (value) {
+                themeProvider.toggleTheme();
+              },
+            ),
           ],
         ),
       ),

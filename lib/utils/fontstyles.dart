@@ -27,6 +27,12 @@ class Fontstyles {
         fontWeight: FontWeight.w500, fontFamily: "Merriweather Sans");
   }
 
+   static TextStyle buttontext3(BuildContext context) {
+    return TextStyle(
+      color: Theme.of(context).colorScheme.inversePrimary,
+        fontWeight: FontWeight.w600, fontFamily: "Merriweather Sans");
+  }
+
   static TextStyle notesText(BuildContext context) {
     return TextStyle(
         color: Theme.of(context).colorScheme.inversePrimary,
