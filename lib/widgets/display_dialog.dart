@@ -44,6 +44,6 @@ class ShowNotesScreen extends StatelessWidget {
                   ],
                 ),
               ),
-            );;
+            );
   }
 }
