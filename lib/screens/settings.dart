@@ -29,7 +29,7 @@ class SettingsScreen extends StatelessWidget {
           children: [
             Text("Dark Mode", style: Fontstyles.buttontext2(context),),
             CupertinoSwitch(
-              activeColor: Theme.of(context).colorScheme.inversePrimary,
+              activeColor: Theme.of(context).colorScheme.background,
               value: themeProvider.isDarkMode,
               onChanged: (value) {
                 themeProvider.toggleTheme();
