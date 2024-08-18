@@ -6,6 +6,7 @@ import 'package:noteful/utils/fontstyles.dart';
 import 'package:noteful/widgets/note_tile.dart';
 import 'package:noteful/widgets/reusable_drawrer.dart';
 import 'package:noteful/widgets/reusable_floating_action_button.dart';
+import 'package:noteful/widgets/search_box.dart';
 import 'package:provider/provider.dart';
 
 class NotesScreen extends StatefulWidget {
@@ -57,6 +58,13 @@ class _NotesScreenState extends State<NotesScreen> {
             SizedBox(
               height: 20,
             ),
+
+            // Search Option
+            //SearchBox(),
+
+            // SizedBox(
+            //   height: 20,
+            // ),
 
             // List of Notes
             Expanded(

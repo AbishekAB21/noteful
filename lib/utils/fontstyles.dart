@@ -13,6 +13,16 @@ class Fontstyles {
         fontFamily: "Merriweather Sans");
   }
 
+  static TextStyle FadedTextStyle(BuildContext context) {
+    return TextStyle(
+      color: Theme.of(context).colorScheme.inversePrimary,
+        fontSize: 16,
+        fontWeight: FontWeight.w300,
+        fontFamily: "Merriweather Sans",
+        
+        );
+  }
+
   static TextStyle buttontext(BuildContext context) {
     return TextStyle(
         fontSize: 15.0,
