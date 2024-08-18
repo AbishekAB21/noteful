@@ -8,6 +8,8 @@ ThemeData lightMode = ThemeData(
     primary: Colors.grey.shade200,
     secondary: Colors.grey.shade400,
     inversePrimary: Colors.grey.shade900,
+    error: Colors.red,
+    tertiary: Colors.green,
     brightness: Brightness.light, // Ensure this matches ThemeData.brightness
   ),
 );
@@ -20,6 +22,8 @@ ThemeData darkmode = ThemeData(
     primary: Color.fromARGB(255, 42, 42, 42),
     secondary: Color.fromARGB(255, 50, 50, 50),
     inversePrimary: Colors.grey.shade300,
+    error: Colors.red,
+    tertiary: Colors.green,
     brightness: Brightness.dark, // Ensure this matches ThemeData.brightness
   ),
 );
