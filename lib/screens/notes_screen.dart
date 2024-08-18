@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:noteful/methods/note_database_methods.dart';
+import 'package:noteful/methods/note_ui_methods.dart';
 import 'package:noteful/models/note.dart';
 import 'package:noteful/utils/fontstyles.dart';
 import 'package:noteful/widgets/note_tile.dart';
@@ -17,123 +18,10 @@ class NotesScreen extends StatefulWidget {
 class _NotesScreenState extends State<NotesScreen> {
   final TextEditingController noteController = TextEditingController();
 
-  // Create
-
-  void createNote() {
-    noteController.clear();
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: Theme.of(context).colorScheme.background,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        title: Text(
-          "Add New Note",
-          style: Fontstyles.buttontext2(context),
-        ),
-        content: TextField(
-          controller: noteController,
-          decoration: InputDecoration(),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text("Cancel", style: Fontstyles.buttontext(context)),
-          ),
-          TextButton(
-              onPressed: () {
-                context.read<NoteDatabase>().addNote(noteController.text);
-                Navigator.pop(context);
-                noteController.clear();
-              },
-              child: Text("Create", style: Fontstyles.buttontext(context)))
-        ],
-      ),
-    );
-  }
-
-  // Read
-
-  void readNotes() {
-    context.read<NoteDatabase>().fetchNotes();
-  }
-
-  // Update
-
-  void updateNote(Note note) {
-    // pre-filling the textfield
-    noteController.text = note.text;
-
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: Theme.of(context).colorScheme.background,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        title: Text(
-          "Edit Note",
-          style: Fontstyles.buttontext2(context),
-        ),
-        content: TextField(
-          controller: noteController,
-          decoration: InputDecoration(),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text("Cancel", style: Fontstyles.buttontext(context)),
-          ),
-          TextButton(
-              onPressed: () {
-                context
-                    .read<NoteDatabase>()
-                    .updateNotes(note.id, noteController.text);
-                Navigator.pop(context);
-                noteController.clear();
-              },
-              child: Text("Update", style: Fontstyles.buttontext(context)))
-        ],
-      ),
-    );
-  }
-
-  // Delete
-
-  void deleteNote(int id) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: Theme.of(context).colorScheme.background,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        content: Text(
-          "This will permenantly delete the note. Do you still want to it ?",
-          style: Fontstyles.buttontext(context),
-        ),
-        title: Text("Think about it..", style: Fontstyles.buttontext2(context)),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text("Cancel", style: Fontstyles.buttontext(context)),
-          ),
-          TextButton(
-              onPressed: () {
-                context.read<NoteDatabase>().deleteNotes(id);
-                Navigator.pop(context);
-              },
-              child: Text("Delete", style: Fontstyles.buttontext(context)))
-        ],
-      ),
-    );
-  }
-
   @override
   void initState() {
     super.initState();
-    readNotes();
+    readNotes(context); 
   }
 
   Widget build(BuildContext context) {
@@ -149,7 +37,7 @@ class _NotesScreenState extends State<NotesScreen> {
         ),
         drawer: Mydrawrer(),
         floatingActionButton: ReusableFloatingActionButton(
-          onpressed: createNote,
+          onpressed: () => createNote(context, noteController), 
           icon: Icon(
             Icons.note_alt_rounded,
             size: 50,
@@ -179,8 +67,8 @@ class _NotesScreenState extends State<NotesScreen> {
 
                   return NoteTile(
                     text: note.text,
-                    onEditPressed: () => updateNote(note),
-                    onDeletePressed: () => deleteNote(note.id),
+                    onEditPressed: () => updateNote(context, note, noteController), 
+                    onDeletePressed: () => deleteNote(context, note.id), 
                   );
                 },
               ),
