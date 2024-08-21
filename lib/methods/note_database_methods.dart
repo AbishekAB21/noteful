@@ -24,7 +24,7 @@ class NoteDatabase extends ChangeNotifier{
     final newNote = Note()..text = textFromUser; // cascading 
 
     // Saving to db
-    await isar.writeTxn(() => isar.notes.put(newNote));
+    await isar.writeTxn(() => isar.notes.put(newNote)); // gets into the isar database using writetxn() and then uses put() to save the value 
 
     fetchNotes();
   }
@@ -68,7 +68,7 @@ class NoteDatabase extends ChangeNotifier{
 
 The writeTxn() is not used to write data into the database. Consider it like a
 method to get into the database from where we can access various other methods
-like Put() -> for writing data, Get() -> for fetching dara, delete() -> for
+like Put() -> for writing data, Get() -> for fetching data, delete() -> for
 deleting data.
 
 
