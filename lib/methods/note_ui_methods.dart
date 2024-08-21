@@ -24,6 +24,7 @@ void createNote(BuildContext context, TextEditingController noteController) {
       ),
       content: TextField(
         controller: noteController,
+        maxLines: 3,
         decoration: InputDecoration(),
       ),
       actions: [
@@ -69,6 +70,7 @@ void updateNote(
       ),
       content: TextField(
         controller: noteController,
+        maxLines: 5, 
         decoration: InputDecoration(),
       ),
       actions: [
